@@ -1,0 +1,81 @@
+// Project portfolio. All entries are clearly-labelled PLACEHOLDER content.
+// Replace with real project information when available. Do not invent client
+// names, statistics or locations of real engagements.
+
+export const projectCategories = [
+  "All",
+  "CCTV",
+  "Wi-Fi",
+  "Starlink",
+  "Networking",
+  "IT Infrastructure",
+];
+
+export const projects = [
+  {
+    id: "p01",
+    title: "Residential Security Installation",
+    type: "CCTV + Wi-Fi",
+    category: "CCTV",
+    location: "Harare, Zimbabwe",
+    services: ["CCTV", "Wi-Fi"],
+    summary: "Perimeter camera coverage and whole-home wireless network for a private residence.",
+    image: "cctv",
+    placeholder: true,
+  },
+  {
+    id: "p02",
+    title: "Office Network Build-out",
+    type: "Networking + Wi-Fi",
+    category: "Networking",
+    location: "Harare, Zimbabwe",
+    services: ["Networking", "Wi-Fi"],
+    summary: "Structured cabling, switching and access-point deployment across a multi-floor office.",
+    image: "networkRack",
+    placeholder: true,
+  },
+  {
+    id: "p03",
+    title: "Rural Connectivity Installation",
+    type: "Starlink + Wi-Fi",
+    category: "Starlink",
+    location: "Zimbabwe",
+    services: ["Starlink", "Wi-Fi"],
+    summary: "Starlink installation with distributed Wi-Fi coverage for an off-grid property.",
+    image: "starlink",
+    placeholder: true,
+  },
+  {
+    id: "p04",
+    title: "Commercial Surveillance System",
+    type: "CCTV",
+    category: "CCTV",
+    location: "Harare, Zimbabwe",
+    services: ["CCTV"],
+    summary: "Multi-camera surveillance system with remote monitoring for a commercial premises.",
+    image: "cctv",
+    placeholder: true,
+  },
+  {
+    id: "p05",
+    title: "Business IT Infrastructure",
+    type: "IT Infrastructure + Networking",
+    category: "IT Infrastructure",
+    location: "Harare, Zimbabwe",
+    services: ["IT Infrastructure", "Networking"],
+    summary: "Server, storage and network deployment for a growing business operation.",
+    image: "networkRack",
+    placeholder: true,
+  },
+  {
+    id: "p06",
+    title: "Warehouse Wi-Fi Coverage",
+    type: "Wi-Fi + Networking",
+    category: "Wi-Fi",
+    location: "Harare, Zimbabwe",
+    services: ["Wi-Fi", "Networking"],
+    summary: "High-coverage wireless network designed for a large warehouse environment.",
+    image: "wifi",
+    placeholder: true,
+  },
+];

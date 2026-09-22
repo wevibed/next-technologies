@@ -177,6 +177,57 @@ Environment variables: VITE_FORM_ENDPOINT   (optional — only if you want
 
 No Cloudflare Workers/Functions are needed — this is a fully static site.
 
+## Post-deploy fix — Cloudflare build failure (2026-09-22)
+
+After the initial migration was pushed to GitHub and deployed, Cloudflare
+Pages failed the production build with:
+
+```text
+Error: [vite]: Rolldown failed to resolve import "@/App.jsx" from "/opt/buildhome/repo/src/main.jsx".
+```
+
+**Root cause:** the `@` → `src` path alias used throughout this codebase
+(`@/App.jsx`, `@/components/...`, etc.) was never configured directly in
+`vite.config.js`. In the original Base44 project it was being supplied at
+build time by `@base44/vite-plugin` itself. The app's `jsconfig.json` also
+defines `"@/*": ["./src/*"]`, but that block is read only by editors/TypeScript
+tooling for autocomplete — Vite's actual bundler (Rolldown, as of Vite 8)
+never reads `jsconfig.json` and has no alias without an explicit
+`resolve.alias` entry. When the Base44 plugin was removed during the
+migration, its implicit alias went with it, and nothing replaced it — a gap
+my own verification missed because I checked that files existed at the
+`@/...` paths without checking whether the bundler itself knew how to reach
+them.
+
+**Fix:** added an explicit `resolve.alias` to `vite.config.js`:
+
+```js
+import { fileURLToPath, URL } from 'node:url'
+
+resolve: {
+  alias: {
+    '@': fileURLToPath(new URL('./src', import.meta.url)),
+  },
+},
+```
+
+This is the standard, version-agnostic way to configure this alias in Vite
+and works the same under Rolldown. No other files were changed for this fix.
+I also re-ran an import-graph check that mirrors this exact alias
+configuration (rather than assuming it, as before) across all files reachable
+from `src/main.jsx`, confirmed the sandbox filesystem is case-sensitive
+(matching Cloudflare's Linux build), and found zero unresolved imports in the
+live app.
+
+One pre-existing, unrelated issue surfaced by a whole-tree (not just
+reachable-graph) scan: five unused shadcn primitives —
+`alert-dialog.jsx`, `sidebar.jsx`, `carousel.jsx`, `pagination.jsx`,
+`calendar.jsx` — import `@/components/ui/button` (lowercase) while the
+actual file is `Button.jsx` (capital B). This predates the Base44 migration
+and does not affect the build today because none of these five files are
+imported by anything in the live app. Left as-is per "no unrelated cleanup,"
+flagged here in case you later wire one of them up.
+
 ## Remaining issues
 
 1. **Contact form has no live backend.** This isn't something the migration

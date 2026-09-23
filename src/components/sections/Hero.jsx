@@ -2,12 +2,26 @@ import Icon from "@/components/Icon";
 import Button from "@/components/ui/Button";
 import { whatsappLink } from "@/config/site";
 
-// Full-bleed black hero. One big headline, one blue CTA, one WhatsApp text link.
-// Nothing else above the fold. Real photo/video drops in via the slot below.
+// Full-bleed hero with a real installation photo behind it. One big
+// headline, one blue CTA, one WhatsApp text link. Nothing else above the fold.
 export default function Hero() {
   return (
     <section className="relative bg-black text-white min-h-[88vh] flex flex-col justify-end overflow-hidden">
-      <div className="max-w-site mx-auto container-px w-full pb-14 md:pb-24">
+      <img
+        src="/images/starlink-hero.png"
+        alt="NEXT IT Technologies engineer installing a Starlink dish on a rooftop in Harare"
+        className="absolute inset-0 w-full h-full object-cover"
+        loading="eager"
+        decoding="async"
+      />
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            "linear-gradient(0deg, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.55) 45%, rgba(0,0,0,0.35) 100%)",
+        }}
+      />
+      <div className="relative max-w-site mx-auto container-px w-full pb-14 md:pb-24">
         <h1
           className="font-display font-semibold tracking-tight text-balance"
           style={{ fontSize: "clamp(2.5rem, 10vw, 5rem)", lineHeight: 1.02, maxWidth: "16ch" }}

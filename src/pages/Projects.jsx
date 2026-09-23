@@ -6,6 +6,7 @@ import Reveal from "@/components/Reveal";
 import ImageSlot from "@/components/ImageSlot";
 import CTABand from "@/components/sections/CTABand";
 import { projects, projectCategories } from "@/data/projects";
+import { realImages } from "@/data/realImages";
 
 export default function Projects() {
   const [active, setActive] = useState("All");
@@ -52,6 +53,8 @@ export default function Projects() {
             {filtered.map((p, i) => (
               <Reveal key={p.id} delay={(i % 3) * 70} as="article" className="group">
                 <ImageSlot
+                  src={realImages[p.image]}
+                  real={Boolean(realImages[p.image])}
                   alt={p.title}
                   ratio="4/3"
                   caption="Real installation photo"

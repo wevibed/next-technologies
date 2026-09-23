@@ -8,6 +8,7 @@ import ImageSlot from "@/components/ImageSlot";
 import CTABand from "@/components/sections/CTABand";
 import ProcessTimeline from "@/components/sections/ProcessTimeline";
 import { getService, services } from "@/data/services";
+import { realImages } from "@/data/realImages";
 import { whatsappLink } from "@/config/site";
 
 export default function ServiceDetail() {
@@ -47,6 +48,8 @@ export default function ServiceDetail() {
         <div className="max-w-site mx-auto container-px grid gap-10 lg:grid-cols-12 lg:gap-16 items-center">
           <div className="lg:col-span-6">
             <ImageSlot
+              src={realImages[service.image]}
+              real={Boolean(realImages[service.image])}
               alt={service.imageAlt}
               ratio="4/3"
               eager

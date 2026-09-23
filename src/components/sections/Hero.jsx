@@ -8,7 +8,7 @@ export default function Hero() {
   return (
     <section className="relative bg-black text-white min-h-[88vh] flex flex-col justify-end overflow-hidden">
       <img
-        src="/images/starlink-hero.png"
+        src="/images/starlink-hero.webp"
         alt="NEXT IT Technologies engineer installing a Starlink dish on a rooftop in Harare"
         className="absolute inset-0 w-full h-full object-cover"
         loading="eager"
